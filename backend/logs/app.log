@@ -1,0 +1,158 @@
+2026-02-18 17:24:13,394 INFO backend pipeline.watermarking file=1739572632533512.mp4 size=20533402
+2026-02-18 17:24:13,395 ERROR backend pipeline.watermarking_failed ffmpeg binary not found on PATH
+Traceback (most recent call last):
+  File "/Users/shivanshnayak/Documents/trae_projects/IT Rules 2026 AI Content Labeler/backend/main.py", line 71, in process_video
+    watermark_video(src_path, wm_path)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/shivanshnayak/Documents/trae_projects/IT Rules 2026 AI Content Labeler/backend/processing.py", line 21, in watermark_video
+    raise WatermarkError("ffmpeg binary not found on PATH")
+backend.processing.WatermarkError: ffmpeg binary not found on PATH
+2026-02-18 17:24:14,210 INFO backend pipeline.watermarking file=1739572632533512.mp4 size=20533402
+2026-02-18 17:24:14,211 ERROR backend pipeline.watermarking_failed ffmpeg binary not found on PATH
+Traceback (most recent call last):
+  File "/Users/shivanshnayak/Documents/trae_projects/IT Rules 2026 AI Content Labeler/backend/main.py", line 71, in process_video
+    watermark_video(src_path, wm_path)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/shivanshnayak/Documents/trae_projects/IT Rules 2026 AI Content Labeler/backend/processing.py", line 21, in watermark_video
+    raise WatermarkError("ffmpeg binary not found on PATH")
+backend.processing.WatermarkError: ffmpeg binary not found on PATH
+2026-02-18 17:36:26,981 INFO backend pipeline.watermarking file=1739572632533512.mp4 size=20533402
+2026-02-18 17:36:26,982 INFO backend.processing watermark.start input=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmps4z5y5kf/input-86cd5d6e25aa4f3aa99f6d9557aa7f8c.mp4 output=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmps4z5y5kf/wm-2950b820a9e94667908304b3c601cd35.mp4
+2026-02-18 17:36:26,982 INFO backend.processing watermark.start input=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmps4z5y5kf/input-86cd5d6e25aa4f3aa99f6d9557aa7f8c.mp4 output=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmps4z5y5kf/wm-2950b820a9e94667908304b3c601cd35.mp4
+2026-02-18 17:36:33,711 ERROR backend.processing watermark.ffmpeg_error ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 17.0.0 (clang-1700.6.3.2)
+  configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.0.1_4 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-openssl --enable-videotoolbox --enable-audiotoolbox --enable-neon
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[AVFilterGraph @ 0xbdcc07a80] No such filter: 'drawtext'
+Error : Filter not found
+Traceback (most recent call last):
+  File "/Users/shivanshnayak/Documents/trae_projects/IT Rules 2026 AI Content Labeler/backend/processing.py", line 47, in watermark_video
+    ffmpeg.run(out, overwrite_output=True, capture_stdout=True, capture_stderr=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shivanshnayak/Library/Python/3.13/lib/python/site-packages/ffmpeg/_run.py", line 325, in run
+    raise Error('ffmpeg', out, err)
+ffmpeg._run.Error: ffmpeg error (see stderr output for detail)
+2026-02-18 17:36:33,711 ERROR backend.processing watermark.ffmpeg_error ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 17.0.0 (clang-1700.6.3.2)
+  configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.0.1_4 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-openssl --enable-videotoolbox --enable-audiotoolbox --enable-neon
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[AVFilterGraph @ 0xbdcc07a80] No such filter: 'drawtext'
+Error : Filter not found
+Traceback (most recent call last):
+  File "/Users/shivanshnayak/Documents/trae_projects/IT Rules 2026 AI Content Labeler/backend/processing.py", line 47, in watermark_video
+    ffmpeg.run(out, overwrite_output=True, capture_stdout=True, capture_stderr=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shivanshnayak/Library/Python/3.13/lib/python/site-packages/ffmpeg/_run.py", line 325, in run
+    raise Error('ffmpeg', out, err)
+ffmpeg._run.Error: ffmpeg error (see stderr output for detail)
+2026-02-18 17:36:33,714 ERROR backend pipeline.watermarking_failed ffmpeg failed: ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 17.0.0 (clang-1700.6.3.2)
+  configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.0.1_4 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-openssl --enable-videotoolbox --enable-audiotoolbox --en
+Traceback (most recent call last):
+  File "/Users/shivanshnayak/Documents/trae_projects/IT Rules 2026 AI Content Labeler/backend/processing.py", line 47, in watermark_video
+    ffmpeg.run(out, overwrite_output=True, capture_stdout=True, capture_stderr=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shivanshnayak/Library/Python/3.13/lib/python/site-packages/ffmpeg/_run.py", line 325, in run
+    raise Error('ffmpeg', out, err)
+ffmpeg._run.Error: ffmpeg error (see stderr output for detail)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/shivanshnayak/Documents/trae_projects/IT Rules 2026 AI Content Labeler/backend/main.py", line 71, in process_video
+    watermark_video(src_path, wm_path)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/shivanshnayak/Documents/trae_projects/IT Rules 2026 AI Content Labeler/backend/processing.py", line 52, in watermark_video
+    raise WatermarkError(f"ffmpeg failed: {msg[:500]}")
+backend.processing.WatermarkError: ffmpeg failed: ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 17.0.0 (clang-1700.6.3.2)
+  configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.0.1_4 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-openssl --enable-videotoolbox --enable-audiotoolbox --en
+2026-02-18 17:45:47,438 INFO backend pipeline.watermarking file=1739572632533512.mp4 size=20533402
+2026-02-18 17:45:47,439 INFO backend.processing watermark.start input=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmp_3633luo/input-3602399a82eb4481a66a0878a1e85934.mp4 output=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmp_3633luo/wm-7a00c896eca54802968de236a1cb2f83.mp4
+2026-02-18 17:45:47,439 INFO backend.processing watermark.start input=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmp_3633luo/input-3602399a82eb4481a66a0878a1e85934.mp4 output=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmp_3633luo/wm-7a00c896eca54802968de236a1cb2f83.mp4
+2026-02-18 17:45:47,536 ERROR backend.processing watermark.ffmpeg_error ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 17.0.0 (clang-1700.6.3.2)
+  configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.0.1_4 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-openssl --enable-videotoolbox --enable-audiotoolbox --enable-neon
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[AVFilterGraph @ 0x955018000] No such filter: 'drawtext'
+Error : Filter not found
+Traceback (most recent call last):
+  File "/Users/shivanshnayak/Documents/trae_projects/IT Rules 2026 AI Content Labeler/backend/processing.py", line 81, in watermark_video
+    ffmpeg.run(out, capture_stdout=True, capture_stderr=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shivanshnayak/Library/Python/3.13/lib/python/site-packages/ffmpeg/_run.py", line 325, in run
+    raise Error('ffmpeg', out, err)
+ffmpeg._run.Error: ffmpeg error (see stderr output for detail)
+2026-02-18 17:45:47,536 ERROR backend.processing watermark.ffmpeg_error ffmpeg version 8.0.1 Copyright (c) 2000-2025 the FFmpeg developers
+  built with Apple clang version 17.0.0 (clang-1700.6.3.2)
+  configuration: --prefix=/opt/homebrew/Cellar/ffmpeg/8.0.1_4 --enable-shared --enable-pthreads --enable-version3 --cc=clang --host-cflags= --host-ldflags= --enable-ffplay --enable-gpl --enable-libsvtav1 --enable-libopus --enable-libx264 --enable-libmp3lame --enable-libdav1d --enable-libvpx --enable-libx265 --enable-openssl --enable-videotoolbox --enable-audiotoolbox --enable-neon
+  libavutil      60.  8.100 / 60.  8.100
+  libavcodec     62. 11.100 / 62. 11.100
+  libavformat    62.  3.100 / 62.  3.100
+  libavdevice    62.  1.100 / 62.  1.100
+  libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[AVFilterGraph @ 0x955018000] No such filter: 'drawtext'
+Error : Filter not found
+Traceback (most recent call last):
+  File "/Users/shivanshnayak/Documents/trae_projects/IT Rules 2026 AI Content Labeler/backend/processing.py", line 81, in watermark_video
+    ffmpeg.run(out, capture_stdout=True, capture_stderr=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shivanshnayak/Library/Python/3.13/lib/python/site-packages/ffmpeg/_run.py", line 325, in run
+    raise Error('ffmpeg', out, err)
+ffmpeg._run.Error: ffmpeg error (see stderr output for detail)
+2026-02-18 17:45:47,538 ERROR backend pipeline.watermarking_failed ffmpeg failed:   libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[AVFilterGraph @ 0x955018000] No such filter: 'drawtext'
+Error : Filter not found
+Traceback (most recent call last):
+  File "/Users/shivanshnayak/Documents/trae_projects/IT Rules 2026 AI Content Labeler/backend/processing.py", line 81, in watermark_video
+    ffmpeg.run(out, capture_stdout=True, capture_stderr=True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shivanshnayak/Library/Python/3.13/lib/python/site-packages/ffmpeg/_run.py", line 325, in run
+    raise Error('ffmpeg', out, err)
+ffmpeg._run.Error: ffmpeg error (see stderr output for detail)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/shivanshnayak/Documents/trae_projects/IT Rules 2026 AI Content Labeler/backend/main.py", line 71, in process_video
+    watermark_video(src_path, wm_path)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/shivanshnayak/Documents/trae_projects/IT Rules 2026 AI Content Labeler/backend/processing.py", line 88, in watermark_video
+    raise WatermarkError(f"ffmpeg failed: {last_lines}")
+backend.processing.WatermarkError: ffmpeg failed:   libavfilter    11.  4.100 / 11.  4.100
+  libswscale      9.  1.100 /  9.  1.100
+  libswresample   6.  1.100 /  6.  1.100
+[AVFilterGraph @ 0x955018000] No such filter: 'drawtext'
+Error : Filter not found
+2026-02-18 18:09:08,651 INFO backend pipeline.watermarking file=1739572632533512.mp4 size=20533402
+2026-02-18 18:09:08,652 INFO backend.processing watermark.start input=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmpz1y_4tcq/input-30adc2a7d6524e4fa2d918639ca578f8.mp4 output=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmpz1y_4tcq/wm-f5fcaa7d20164d55b4fac7d60e7239a9.mp4
+2026-02-18 18:09:08,652 INFO backend.processing watermark.start input=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmpz1y_4tcq/input-30adc2a7d6524e4fa2d918639ca578f8.mp4 output=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmpz1y_4tcq/wm-f5fcaa7d20164d55b4fac7d60e7239a9.mp4
+2026-02-18 18:09:15,146 INFO backend.processing watermark.done output=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmpz1y_4tcq/wm-f5fcaa7d20164d55b4fac7d60e7239a9.mp4 size=3634410
+2026-02-18 18:09:15,146 INFO backend.processing watermark.done output=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmpz1y_4tcq/wm-f5fcaa7d20164d55b4fac7d60e7239a9.mp4 size=3634410
+2026-02-18 18:09:15,147 INFO backend pipeline.c2pa_injection file=1739572632533512.mp4
+2026-02-18 18:09:15,148 INFO backend.processing c2pa.start input=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmpz1y_4tcq/wm-f5fcaa7d20164d55b4fac7d60e7239a9.mp4 output=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmpz1y_4tcq/final-099b787504874603a4a437713dfcd8d0.mp4 manifest=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmpz1y_4tcq/manifest.json
+2026-02-18 18:09:15,148 INFO backend.processing c2pa.start input=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmpz1y_4tcq/wm-f5fcaa7d20164d55b4fac7d60e7239a9.mp4 output=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmpz1y_4tcq/final-099b787504874603a4a437713dfcd8d0.mp4 manifest=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmpz1y_4tcq/manifest.json
+2026-02-18 18:09:16,275 INFO backend.processing c2pa.done output=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmpz1y_4tcq/final-099b787504874603a4a437713dfcd8d0.mp4 size=3648162
+2026-02-18 18:09:16,275 INFO backend.processing c2pa.done output=/var/folders/f1/3d0xxcfd3hz1_pll73m7gt940000gn/T/tmpz1y_4tcq/final-099b787504874603a4a437713dfcd8d0.mp4 size=3648162
