@@ -37,7 +37,7 @@ def _setup_logging():
 
 logger = _setup_logging()
 
-@app.post("/process-video/")
+@app.post("/process-video")
 async def process_video(file: UploadFile = File(...)):
   # Allow any video type but still enforce size
   if not file.content_type.startswith("video/"):
