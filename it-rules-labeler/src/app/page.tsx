@@ -91,7 +91,7 @@ export default function Home() {
       // Use environment variable or fallback to localhost
       const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
       
-      const res = await fetch(`${apiBase}/process-video/`, {
+      const res = await fetch(`${apiBase}/process-video`, {
         method: "POST",
         body: form,
       });
