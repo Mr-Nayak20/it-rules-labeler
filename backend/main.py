@@ -10,7 +10,7 @@ import tempfile
 import logging
 from logging.handlers import RotatingFileHandler
 
-from .processing import watermark_video, inject_c2pa, WatermarkError, C2PAError
+from processing import watermark_video, inject_c2pa, WatermarkError, C2PAError
 
 app = FastAPI()
 
