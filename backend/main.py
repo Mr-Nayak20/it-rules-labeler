@@ -14,7 +14,7 @@ from .processing import watermark_video, inject_c2pa, WatermarkError, C2PAError
 
 app = FastAPI()
 
-allowed_origins: List[str] = ["*"]
+allowed_origins: List[str] = ["https://labeler.viralityos.in", "http://localhost:3000"]
 
 app.add_middleware(
   CORSMiddleware,
