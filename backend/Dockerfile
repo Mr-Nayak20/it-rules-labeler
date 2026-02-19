@@ -9,9 +9,9 @@ RUN apt-get update && apt-get install -y \
 # Install c2patool (v0.26.1)
 RUN wget -q https://github.com/contentauth/c2pa-rs/releases/download/c2patool-v0.26.1/c2patool-v0.26.1-x86_64-unknown-linux-gnu.tar.gz \
     && tar -xzf c2patool-v0.26.1-x86_64-unknown-linux-gnu.tar.gz \
-    && mv c2patool-v0.26.1-x86_64-unknown-linux-gnu/c2patool /usr/local/bin/ \
-    && rm c2patool-v0.26.1-x86_64-unknown-linux-gnu.tar.gz \
-    && rm -rf c2patool-v0.26.1-x86_64-unknown-linux-gnu
+    && mv c2patool /usr/local/bin/ \
+    && chmod +x /usr/local/bin/c2patool \
+    && rm c2patool-v0.26.1-x86_64-unknown-linux-gnu.tar.gz
 
 # Set working directory
 WORKDIR /app
