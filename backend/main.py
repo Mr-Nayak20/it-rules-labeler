@@ -14,12 +14,10 @@ from processing import watermark_video, inject_c2pa, WatermarkError, C2PAError
 
 app = FastAPI()
 
-allowed_origins: List[str] = ["https://labeler.viralityos.in", "http://localhost:3000"]
-
 app.add_middleware(
   CORSMiddleware,
-  allow_origins=allowed_origins,
-  allow_credentials=True,
+  allow_origins=["*"],
+  allow_credentials=False,
   allow_methods=["*"],
   allow_headers=["*"],
 )
