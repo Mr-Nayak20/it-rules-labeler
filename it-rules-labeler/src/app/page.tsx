@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useRef } from "react";
 import { UploadCloud, ShieldCheck, CheckCircle, AlertCircle, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +7,8 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import Script from "next/script";
+import { FFmpeg } from "@ffmpeg/ffmpeg";
+import { fetchFile, toBlobURL } from "@ffmpeg/util";
 
 const MAX_BYTES = 100 * 1024 * 1024;
 
@@ -18,9 +20,11 @@ export default function Home() {
   const [emailError, setEmailError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [loadingText, setLoadingText] = useState("");
   const [success, setSuccess] = useState(false);
   const [legalAccepted, setLegalAccepted] = useState(false);
   const [showCheckboxError, setShowCheckboxError] = useState(false);
+  const ffmpegRef = useRef(new FFmpeg());
 
   const fileInfo = useMemo(() => {
     if (!file) return null;
@@ -69,63 +73,81 @@ export default function Home() {
     URL.revokeObjectURL(url);
   };
 
-  const processVideo = async () => {
+  const processVideoLocally = async () => {
+    if (!file) return;
     setLoading(true);
     setProgress(0);
-
-    // Simulated progress for better UX
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 95) return prev;
-        return prev + 5;
-      });
-    }, 500);
-
+    setLoadingText("Initializing Secure Engine...");
+    
     try {
-      const form = new FormData();
-      if (file) {
-        form.append("file", file, file.name);
+      const ffmpeg = ffmpegRef.current;
+      const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd";
+      
+      // Load ffmpeg if not loaded
+      if (!ffmpeg.loaded) {
+        await ffmpeg.load({
+          coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
+          wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
+        });
+      }
+
+      setLoadingText("Watermarking Video Locally...");
+      setProgress(30);
+
+      // Create watermark image
+      const canvas = document.createElement("canvas");
+      canvas.width = 400;
+      canvas.height = 100;
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+        ctx.fillRect(0, 0, 400, 100);
+        ctx.font = "bold 24px Arial";
+        ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("MeitY G.S.R. 120(E) Compliant", 200, 50);
       }
       
-      // Determine the API base URL
-      // Use environment variable or fallback to localhost
-      const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-      const targetUrl = `${apiBase.replace(/\/$/, "")}/process-video`;
-      
-      const res = await fetch(targetUrl, {
-        method: "POST",
-        body: form,
+      const watermarkBlob = await new Promise<Blob>((resolve) => {
+        canvas.toBlob((blob) => resolve(blob!), "image/png");
       });
 
-      clearInterval(interval);
+      await ffmpeg.writeFile("watermark.png", await fetchFile(watermarkBlob));
+      await ffmpeg.writeFile("input.mp4", await fetchFile(file));
 
-      if (!res.ok) {
-        setProgress(0);
-        let message = "Processing failed";
-        try {
-          const data = await res.json();
-          if (data?.detail) message = String(data.detail);
-        } catch {
-          try {
-            const text = await res.text();
-            if (text) message = text;
-          } catch {}
-        }
-        throw new Error(message);
-      }
+      setProgress(50);
+
+      // Run ffmpeg command
+      await ffmpeg.exec([
+        "-i", "input.mp4",
+        "-i", "watermark.png",
+        "-filter_complex", "overlay=main_w-overlay_w-10:main_h-overlay_h-10",
+        "-c:a", "copy",
+        "output.mp4"
+      ]);
+
+      setLoadingText("Finalizing...");
+      setProgress(90);
+
+      const data = await ffmpeg.readFile("output.mp4");
+      // @ts-ignore - FFmpeg return type mismatch with Blob constructor
+      const blob = new Blob([data], { type: "video/mp4" });
       
       setProgress(100);
-      const blob = await res.blob();
-      triggerDownload(blob, file ? file.name : "video.mp4");
+      triggerDownload(blob, file.name);
       setSuccess(true);
     } catch (e: any) {
-      clearInterval(interval);
-      setProgress(0);
-      setError(e?.message ? String(e.message) : "Processing failed. Try again.");
+      console.error(e);
+      setError("Local processing failed. Please try a smaller file or different browser.");
     } finally {
       setLoading(false);
-      // Reset progress after a delay if needed, but for now we leave it or reset on next start
+      setLoadingText("");
     }
+  };
+
+  const processVideo = async () => {
+    // Deprecated backend function
   };
 
   const handleProtect = async () => {
@@ -167,8 +189,8 @@ export default function Home() {
         description: "IT Rules Compliance Processing",
         order_id: orderData.id,
         handler: async function (_response: any) {
-          // Payment success, proceed to process video
-          await processVideo();
+          // Payment success, proceed to process video locally
+          await processVideoLocally();
         },
         prefill: {
           email: email,
@@ -319,7 +341,7 @@ export default function Home() {
                 className="h-auto w-full rounded-xl bg-[#0055A4] py-4 text-lg font-bold text-white shadow-md transition-all hover:bg-blue-800 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {!loading && <Lock className="mr-2 h-5 w-5" />}
-                {loading ? "Processing Compliance..." : "Inject Metadata & Secure Video — ₹99"}
+                {loading ? loadingText || "Processing Compliance..." : "Inject Metadata & Secure Video — ₹99"}
               </Button>
             </div>
             
