@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useMemo, useState, useRef } from "react";
-import { UploadCloud, ShieldCheck, CheckCircle, AlertCircle, Lock } from "lucide-react";
+import { UploadCloud, ShieldCheck, CheckCircle, AlertCircle, Lock, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
@@ -24,6 +24,7 @@ export default function Home() {
   const [success, setSuccess] = useState(false);
   const [legalAccepted, setLegalAccepted] = useState(false);
   const [showCheckboxError, setShowCheckboxError] = useState(false);
+  const [timeLeft, setTimeLeft] = useState("");
   const ffmpegRef = useRef<FFmpeg | null>(null);
 
   const fileInfo = useMemo(() => {
@@ -109,7 +110,7 @@ export default function Home() {
         ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText("MeitY G.S.R. 120(E) Compliant", 200, 50);
+        ctx.fillText("Synthetically Generated", 200, 50);
       }
       
       const watermarkBlob = await new Promise<Blob>((resolve) => {
@@ -121,11 +122,29 @@ export default function Home() {
 
       setProgress(50);
 
+      // Setup progress listener
+      const startTime = Date.now();
+      ffmpeg.on("progress", (event) => {
+        const p = Math.max(0, Math.min(1, event.progress));
+        setProgress(p * 100);
+        if (p > 0.01 && p < 1) {
+          const elapsedTime = (Date.now() - startTime) / 1000;
+          const estimatedTotal = elapsedTime / p;
+          const remaining = Math.max(0, Math.round(estimatedTotal - elapsedTime));
+          setTimeLeft(`Estimated time: ${remaining}s`);
+        } else if (p >= 1) {
+          setTimeLeft("Finalizing file...");
+        }
+      });
+
       // Run ffmpeg command
       await ffmpeg.exec([
         "-i", "input.mp4",
         "-i", "watermark.png",
         "-filter_complex", "overlay=main_w-overlay_w-10:main_h-overlay_h-10",
+        "-c:v", "libx264",
+        "-preset", "ultrafast",
+        "-crf", "28",
         "-c:a", "copy",
         "output.mp4"
       ]);
@@ -365,9 +384,10 @@ export default function Home() {
             {loading && (
               <div className="space-y-2">
                 <Progress value={progress} className="h-2 w-full bg-slate-100" />
-                <p className="text-center text-xs font-medium text-slate-500">
-                  ENCRYPTING & SIGNING... {progress}%
-                </p>
+                <div className="flex items-center justify-center gap-2 text-center text-sm font-mono text-slate-500">
+                  <Clock className="h-4 w-4" />
+                  <span>{loadingText || timeLeft || "Processing..."}</span>
+                </div>
               </div>
             )}
           </div>
