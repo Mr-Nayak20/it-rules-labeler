@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI, File, UploadFile, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from typing import List
@@ -22,6 +22,10 @@ app.add_middleware(
   allow_headers=["*"],
 )
 
+@app.get("/")
+async def root():
+    return {"status": "The Compliance Engine is Awake and Live."}
+
 def _setup_logging():
   os.makedirs(os.path.join(os.path.dirname(__file__), "logs"), exist_ok=True)
   logger = logging.getLogger("backend")
@@ -38,6 +42,7 @@ def _setup_logging():
 logger = _setup_logging()
 
 @app.post("/process-video")
+@app.post("/process-video/")
 async def process_video(file: UploadFile = File(...)):
   # Allow any video type but still enforce size
   if not file.content_type.startswith("video/"):
@@ -117,3 +122,7 @@ async def process_video(file: UploadFile = File(...)):
       filename=download_filename,
       headers=headers,
     )
+
+@app.options("/{rest_of_path:path}")
+async def preflight_handler():
+    return Response(status_code=200)
