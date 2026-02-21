@@ -9,9 +9,9 @@ export async function POST(req: NextRequest) {
     });
 
     const options = {
-      amount: 9900, // amount in smallest currency unit (paise)
+      amount: 9900,
       currency: "INR",
-      receipt: `receipt_order_${Date.now()}`,
+      receipt: "receipt_" + Date.now(),
     };
 
     const order = await instance.orders.create(options);

@@ -90,7 +90,7 @@ export default function Home() {
       // Determine the API base URL
       // Use environment variable or fallback to localhost
       const apiBase = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-      const targetUrl = new URL("/process-video", apiBase).toString().replace(/\/$/, "");
+      const targetUrl = `${apiBase.replace(/\/$/, "")}/process-video`;
       
       const res = await fetch(targetUrl, {
         method: "POST",

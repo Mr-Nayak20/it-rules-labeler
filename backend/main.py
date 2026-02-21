@@ -27,6 +27,16 @@ app.add_middleware(
 async def root():
     return {"status": "The Compliance Engine is Awake and Live."}
 
+from fastapi.responses import JSONResponse
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request, exc):
+    return JSONResponse(
+        status_code=500,
+        content={"detail": str(exc)},
+        headers={"Access-Control-Allow-Origin": "*"}
+    )
+
 def _setup_logging():
   os.makedirs(os.path.join(os.path.dirname(__file__), "logs"), exist_ok=True)
   logger = logging.getLogger("backend")
