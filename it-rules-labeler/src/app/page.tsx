@@ -24,7 +24,7 @@ export default function Home() {
   const [success, setSuccess] = useState(false);
   const [legalAccepted, setLegalAccepted] = useState(false);
   const [showCheckboxError, setShowCheckboxError] = useState(false);
-  const ffmpegRef = useRef(new FFmpeg());
+  const ffmpegRef = useRef<FFmpeg | null>(null);
 
   const fileInfo = useMemo(() => {
     if (!file) return null;
@@ -80,6 +80,9 @@ export default function Home() {
     setLoadingText("Initializing Secure Engine...");
     
     try {
+      if (!ffmpegRef.current) {
+        ffmpegRef.current = new FFmpeg();
+      }
       const ffmpeg = ffmpegRef.current;
       const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd";
       
