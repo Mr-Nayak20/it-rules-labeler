@@ -20,6 +20,7 @@ app.add_middleware(
   allow_credentials=False,
   allow_methods=["*"],
   allow_headers=["*"],
+  expose_headers=["*"],
 )
 
 @app.get("/")
@@ -122,7 +123,3 @@ async def process_video(file: UploadFile = File(...)):
       filename=download_filename,
       headers=headers,
     )
-
-@app.options("/{rest_of_path:path}")
-async def preflight_handler():
-    return Response(status_code=200)
