@@ -413,8 +413,14 @@ export default function Home() {
             </div>
         </div>
 
-        <footer className="mt-12 text-center text-[10px] text-slate-400">
-          © 2026 Virality OS. Not affiliated with Meta, Google, or TikTok.
+        <footer className="mt-12 flex flex-col items-center gap-4 text-center text-[10px] text-slate-400">
+          <p>© 2026 Virality OS. Not affiliated with Meta, Google, or TikTok.</p>
+          <div className="flex gap-4">
+            <a href="/terms" className="hover:text-slate-600 hover:underline">Terms & Conditions</a>
+            <a href="/privacy" className="hover:text-slate-600 hover:underline">Privacy Policy</a>
+            <a href="/refund" className="hover:text-slate-600 hover:underline">Refund Policy</a>
+            <a href="/cancellation" className="hover:text-slate-600 hover:underline">Cancellation Policy</a>
+          </div>
         </footer>
 
         {success && (
