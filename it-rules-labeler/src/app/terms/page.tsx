@@ -2,7 +2,8 @@ import React from "react";
 
 export default function TermsPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
+    <div className="min-h-dvh w-full bg-slate-50 font-sans text-slate-900 selection:bg-blue-100 selection:text-blue-900 px-4 py-12">
+      <div className="mx-auto max-w-3xl">
       <h1 className="mb-6 text-3xl font-bold text-slate-900">Terms and Conditions</h1>
       <div className="prose prose-slate text-slate-600">
         <p>Last updated: {new Date().toLocaleDateString()}</p>
@@ -46,6 +47,7 @@ export default function TermsPage() {
         <p>
           If you have any questions about these Terms, please contact us at support@viralityos.in.
         </p>
+      </div>
       </div>
     </div>
   );

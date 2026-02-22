@@ -2,7 +2,8 @@ import React from "react";
 
 export default function RefundPage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 py-12">
+    <div className="min-h-dvh w-full bg-slate-50 font-sans text-slate-900 selection:bg-blue-100 selection:text-blue-900 px-4 py-12">
+      <div className="mx-auto max-w-3xl">
       <h1 className="mb-6 text-3xl font-bold text-slate-900">Refund Policy</h1>
       <div className="prose prose-slate text-slate-600">
         <p>Last updated: {new Date().toLocaleDateString()}</p>
@@ -43,6 +44,7 @@ export default function RefundPage() {
         <p>
           Approved refunds will be processed within 5-7 business days and credited back to the original payment method.
         </p>
+      </div>
       </div>
     </div>
   );
