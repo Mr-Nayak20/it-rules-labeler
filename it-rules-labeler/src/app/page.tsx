@@ -208,7 +208,7 @@ export default function Home() {
         amount: orderData.amount,
         currency: orderData.currency,
         name: "Virality OS",
-        description: "IT Rules Compliance Processing",
+        description: "IT Rules 2026 Compliance Metadata",
         order_id: orderData.id,
         handler: async function (_response: any) {
           // Payment success, proceed to process video locally
@@ -218,7 +218,7 @@ export default function Home() {
           email: email,
         },
         theme: {
-          color: "#059669", // emerald-600
+          color: "#0055A4", // Institutional Deep Blue
         },
       };
 
